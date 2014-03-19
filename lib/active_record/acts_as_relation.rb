@@ -122,6 +122,9 @@ module ActiveRecord
 
         code = <<-EndCode
           belongs_to :#{association_name}, :polymorphic => true, :dependent => :destroy
+          before_destroy do
+            self.#{association_name}.destroy
+          end
 
           def specific
             self.#{association_name}
